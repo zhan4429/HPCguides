@@ -68,12 +68,15 @@ The core idea is complete encapsulation: a Singularity container doesn't just ho
 
 ### Environment modules
 
-Users don't need to manually interact with the container **SIF** file. HPC centers simplify this process by using the Environment Module System to make the container can be loaded as modules.
+You don’t need to run containers manually. The cluster provides Environment Modules that automatically load and execute software from containers.
 
-Below are some of the python-related modules:
+Example Python-related modules:
 
-- ## python-gpu
-- ollama-python: ollama
+- python-gpu – Python with NVIDIA CUDA
+- ollama-python – Python with NVIDIA CUDA and Ollama
+- pytorch – PyTorch with CUDA support
+
+### Example usage:
 
 ```
 $ module avail pytorch
@@ -88,7 +91,9 @@ Once the module is loaded, you can treat it just like any other activated enviro
 
 ### Install python packages
 
-After loading a Python module, to install packages in your home directory, enter:
+After loading a container-based Python module, you can still install extra packages.
+
+#### Option 1: Install to Your Home Directory (not Recommended)
 
 ```
 pip install <package_name> --user
@@ -96,7 +101,7 @@ pip install <package_name> --user
 
 By default, Python will install local (i.e., user) packages in your home directory (e.g., ~/.local/lib/python3.11/site-packages).
 
-#### Preferred Method: Install into a Dedicated Project Library
+#### Option 2: Preferred — Use a Dedicated Project Library
 
 Use the **--target** option to install packages into a directory outside your main $HOME to keep it clean and manage packages per-project.
 
@@ -118,9 +123,11 @@ To automatically set this variable when logging in to the cluster, add this line
 
 ### Running Jupyter Notebooks with Container Kernels
 
-To run the container using Jupyter Notebook/Lab on Open OnDemand, you have to ensure jupyter server uses the container's Python as a kernel.
+When using JupyterLab or Notebook (e.g., via Open OnDemand), you can run your notebooks using containerized Python kernels.
 
-#### Copy and Customize the Kernel Configuration
+#### Step 1. Copy and Customize the Kernel Definition
+
+Each containerized module has a corresponding Jupyter kernel definition you can copy:
 
 We provide a kernel file for each module, and users need to copy to your $HOME and modify it.
 
@@ -128,7 +135,9 @@ We provide a kernel file for each module, and users need to copy to your $HOME a
 $ cp -r /cluster/tufts/apps/container/ngc/kernels/pytorch-2.7.1-cuda12.6-cudnn9 $HOME/.local/share/jupyter/kernels/
 ```
 
-#### Update the Kernel's PYTHONPATH
+#### Step 2. Update the Kernel’s kernel.json
+
+Edit the copied kernel.json to include your custom PYTHONPATH:
 
 The **kernel.json** file defines the kernel's execution environment. You must edit this file to include your project-specific package installation path (**/cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.2** in this example).
 
@@ -149,4 +158,4 @@ The **kernel.json** file defines the kernel's execution environment. You must ed
 }
 ```
 
-When you launch Jupyter, the "pytorch 2.7.1-cuda12.6-cudnn9" kernel will be ready-to-use.
+When you open Jupyter, the **pytorch 2.7.1-cuda12.6-cudnn9** kernel will appear in the dropdown menu and use your container’s environment plus your custom package directory.
