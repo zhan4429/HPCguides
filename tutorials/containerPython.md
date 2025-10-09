@@ -107,13 +107,13 @@ Use the **--target** option to install packages into a directory outside your ma
 
 ```
 # 1. Create a dedicated project library folder
-$ mkdir -p /cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.2
+$ mkdir -p /cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.1
 
 # 2. Install packages directly into that folder
-$ pip install pandas scikit-learn --target /cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.2
+$ pip install nlk --target /cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.1
 
-# 3. **Crucially**: Tell the Python interpreter to look here for modules
-$ export PYTHONPATH=/cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.2:$PYTHONPATH
+# 3. Crucially: Tell the Python interpreter to look here for modules
+$ export PYTHONPATH=/cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.1:$PYTHONPATH
 ```
 
 To automatically set this variable when logging in to the cluster, add this line to your **~/.bashrc**.
@@ -132,9 +132,9 @@ $ cp -r /cluster/tufts/apps/container/ngc/kernels/pytorch-2.7.1-cuda12.6-cudnn9 
 
 #### Step 2. Update the Kernel’s kernel.json
 
-Edit the copied kernel.json to include your custom PYTHONPATH:
+After copying the kernel to your home directory, you can edit its configuration to include your custom Python package path.
 
-The **kernel.json** file defines the kernel's execution environment. You must edit this file to include your project-specific package installation path (**/cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.2** in this example).
+The **kernel.json** file defines how Jupyter launches your Python environment. You must modify it to include your project’s package installation directory (for example, /cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.2).
 
 ```
 {
@@ -148,9 +148,35 @@ The **kernel.json** file defines the kernel's execution environment. You must ed
    "display_name": "pytorch 2.7.1-cuda12.6-cudnn9",
    "language": "python",
    "env": {
-    "PYTHONPATH": "/cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.2:$PYTHONPATH"
+    "PYTHONPATH": "/cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.1:$PYTHONPATH"
   }
 }
 ```
 
-When you open Jupyter, the **pytorch 2.7.1-cuda12.6-cudnn9** kernel will appear in the dropdown menu and use your container’s environment plus your custom package directory.
+#### Step 3. Run PyTorch and Custom Packages in Jupyter
+
+Once saved, launch Jupyter Notebook or JupyterLab using the **Jupyter** app on Open OnDemand.
+You should now see a kernel named **pytorch 2.7.1-cuda12.6-cudnn9** in the kernel selection menu.
+This kernel runs your notebook inside the containerized PyTorch environment while including your own installed Python packages.
+
+<img src="img/jupyter.png"
+       alt="Jupyter kernels"
+       style="float: left; margin-right: 15px; width: 300px; height: auto;">
+
+  <p>
+
+After selecting the kernel, you can now run PyTorch with full NVIDIA GPU support.
+
+<img src="img/pytorch.png"
+       alt="Pytorch"
+       style="float: left; margin-right: 15px; width: 300px; height: auto;">
+
+<p>
+
+It's worth to mention that the **pytorch** is provided by the module itself. Furthermore, users can execute custom Python packages such as NLTK.
+
+<img src="img/nltk.png"
+       alt="NLTK"
+       style="float: left; margin-right: 15px; width: 300px; height: auto;">
+
+<p>
