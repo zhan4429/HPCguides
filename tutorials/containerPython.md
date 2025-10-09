@@ -4,30 +4,57 @@ When working on a High-Performance Computing (HPC) cluster, managing your softwa
 
 ### Traditional Python Environment Management
 
-The two most common methods for managing scientific Python packages (like NumPy and SciPy) on HPC are Conda and Python Virtual Environments (venv). Both methods aim to isolate Python libraries for individual projects:
+The two most common methods for managing scientific Python packages (like NumPy and SciPy) on HPC are `Conda` and Python Virtual Environments (`venv`). Both methods aim to isolate Python libraries for individual projects:
 
 #### 1. Conda Environments
 
 **What it is**: Conda is both a package manager and an environment manager. It was originally created for Python packages but is capable of managing software written in any language (R, C/C++ libraries, etc.). This makes it very popular for scientific computing where packages like NumPy or SciPy require specific low-level system libraries.
 
-**How it works**: You usually start by loading a base Conda distribution (like anaconda or miniforge) using the cluster's module system (e.g., module load miniforge).
-You then create a new, isolated environment for your project: `conda create -n my_project_env python=3.10 numpy`.
-You activate the environment (`conda activate my_project_env`) and install all your required packages using `conda install` or the standard Python installer, `pip`.
+**How it works**: You usually start by loading a base Conda distribution (like `anaconda` or `miniforge`) using the cluster's module system (e.g., `module load miniforge`).
+
+You then create a new, isolated environment for your project:
+
+```
+conda create -n my_project_env python=3.10 numpy`
+```
+
+You activate the environment:
+
+```
+conda activate my_project_env
+```
+
+and install all your required packages using **conda install** or the standard Python installer, **pip**.
+
 **Main Benefit**: It handles both Python packages and complex non-Python dependencies, ensuring they are compatible.
 
 #### 2. Python Virtual Environments (venv)
 
 **What it is**: A Python virtual environment (created with the built-in `venv` tool) is a simpler, lightweight directory that contains its own Python executable and a copy of the `pip` installer. It isolates Python packages to a specific project.
 
-**How it works**: You load a system-provided Python version using the module system (e.g., module load miniforge).
-You create an environment: `python -m venv my_project_venv`.
-You activate it: `source my_project_venv/bin/activate`.
-You install packages using pip: `pip install pandas scikit-learn`.
+**How it works**: You load a system-provided Python version using the module system (e.g., **module load python**).
+You create an environment:
+
+```
+python -m venv my_project_venv
+```
+
+You activate it:
+
+```
+source my_project_venv/bin/activate
+```
+
+You install packages using pip:
+
+```
+pip install pandas scikit-learn
+```
 
 **Main Benefit**: It's the standard, lightweight Python solution for isolating dependencies, but it still relies on the base system's core libraries (like C compilers or low-level numerical libraries) to work correctly.
 These methods allow researchers to have separate, working versions of Python and their libraries for different projects without interfering with the system's global Python installation or other users' work.
 
-While these methods isolate your Python packages, they share a critical flaw: they rely on the HPC system's base software (like specific CUDA drivers or compilers). If the system administrator updates these base libraries, your project's environment can suddenly break, leading to inconsistent, non-reproducible results—a problem known as `environmental drift`.
+While these methods isolate your Python packages, they share a critical flaw: they rely on the HPC system's base software (like specific CUDA drivers or compilers). If the system administrator updates these base libraries, your project's environment can suddenly break, leading to inconsistent, non-reproducible results—a problem known as **environmental drift**.
 
 #### The Superior Solution: Apptainer/Singularity Containers
 
@@ -91,7 +118,7 @@ To install Python packages in a library other than the default, you can use the 
 
 ```
 mkdir -p /cluster/tufts/mylab/myUTLN/pythonEnv
-pip install <package_name> --target /cluster/tufts/mylab/myUTLN/pythonEnv/biopython1.8.5
+pip install <package_name> --target /cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.2
 ```
 
 To load packages from this location, ensure you have appended your `PYTHONPATH` environment variable to include this directory:
