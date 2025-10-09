@@ -114,20 +114,15 @@ $ pip install pandas scikit-learn --target /cluster/tufts/mylab/myUTLN/pythonEnv
 
 # 3. **Crucially**: Tell the Python interpreter to look here for modules
 $ export PYTHONPATH=/cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.2:$PYTHONPATH
-
-# To make this setting permanent for your project's workflow, add the export line
-# to your Slurm batch script or your ~/.bashrc (if you only work on this project).
 ```
 
-To automatically set this variable when logging in to the cluster, add this line to your `~/.bashrc`.
+To automatically set this variable when logging in to the cluster, add this line to your **~/.bashrc**.
 
 ### Running Jupyter Notebooks with Container Kernels
 
 When using JupyterLab or Notebook (e.g., via Open OnDemand), you can run your notebooks using containerized Python kernels.
 
 #### Step 1. Copy and Customize the Kernel Definition
-
-Each containerized module has a corresponding Jupyter kernel definition you can copy:
 
 We provide a kernel file for each module, and users need to copy to your $HOME and modify it.
 
