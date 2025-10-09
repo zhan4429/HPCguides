@@ -159,21 +159,21 @@ Once saved, launch Jupyter Notebook or JupyterLab using the **Jupyter** app on O
 You should now see a kernel named **pytorch 2.7.1-cuda12.6-cudnn9** in the kernel selection menu.
 This kernel runs your notebook inside the containerized PyTorch environment while including your own installed Python packages.
 
+After selecting the kernel, you can now run PyTorch with full NVIDIA GPU support.
+
+It's worth to mention that the **pytorch** is provided by the module itself. Furthermore, users can execute custom Python packages such as NLTK.
+
 <img src="img/jupyter.png"
        alt="Jupyter kernels"
-       style="float: left; margin-right: 15px; width: 800px; height: auto;">
+       style="float: left; margin-right: 15px; width: 600px; height: auto;">
 
   <p>
-
-After selecting the kernel, you can now run PyTorch with full NVIDIA GPU support.
 
 <img src="img/torch.png"
        alt="Pytorch"
        style="float: left; margin-right: 15px; width: 800px; height: auto;">
 
 <p>
-
-It's worth to mention that the **pytorch** is provided by the module itself. Furthermore, users can execute custom Python packages such as NLTK.
 
 <img src="img/nltk.png"
        alt="NLTK"
