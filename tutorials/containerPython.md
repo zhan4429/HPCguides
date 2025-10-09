@@ -56,36 +56,81 @@ These methods allow researchers to have separate, working versions of Python and
 
 While these methods isolate your Python packages, they share a critical flaw: they rely on the HPC system's base software (like specific CUDA drivers or compilers). If the system administrator updates these base libraries, your project's environment can suddenly break, leading to inconsistent, non-reproducible results—a problem known as **environmental drift**.
 
-#### The Superior Solution: Apptainer/Singularity Containers
+### The Superior Solution: Apptainer/Singularity Containers
 
-The core idea is complete encapsulation: a Singularity container doesn't just hold your Python code; it packages the entire runtime environment—including the Python interpreter, all required dependencies, and the specific underlying system libraries and OS components—into a single, secure SIF file.
+The core idea is complete encapsulation: a Singularity container doesn't just hold your Python code; it packages the entire runtime environment—including the Python interpreter, all required dependencies, and the specific underlying system libraries and OS components—into a single, secure **SIF** file.
 
 - **Instant Deployment for Complex Software**: The single greatest time-saver is the ability to bypass the difficult, multi-step installation and compilation process for complex packages like PyTorch or TensorFlow. Instead of spending days debugging version mismatches (e.g., matching Python to CUDA drivers), users simply run one command to pull a pre-built container created by experts (like NVIDIA). This container is a perfectly configured, ready-to-run environment.
-- **Absolute Reproducibility**: Because the SIF file is a frozen, complete snapshot of the entire software stack, it guarantees that your code will run the exact same way years later, on any compatible HPC system. This entirely eliminates the risk of environmental drift and ensures your research results are verifiable.
+
+- **Absolute Reproducibility**: Because the **SIF** file is a frozen, complete snapshot of the entire software stack, it guarantees that your code will run the exact same way years later, on any compatible HPC system. This entirely eliminates the risk of environmental drift and ensures your research results are verifiable.
+
 - **HPC Security and Performance**: Singularity is the container platform approved by nearly all HPC centers because it is fundamentally secure. It runs with the same user privileges you already have, preventing security issues associated with other container tools. Crucially, it ensures optimal performance by allowing your Python code to talk directly to high-speed HPC hardware, such as GPUs and network interconnects, with minimal overhead.
 
-### Containerized modules
+### Environment modules
+
+Users don't need to manually interact with the container **SIF** file. HPC centers simplify this process by using the Environment Module System to make the container can be loaded as modules.
+
+Below are some of the python-related modules:
+
+- ## python-gpu
+- ollama-python: ollama
 
 ```
 $ module avail pytorch
 
----------------------------------------------------------------------- /cluster/tufts/apps/container/ngc/modules -----------------------------------------------------------------------
+---------- /cluster/tufts/apps/container/ngc/modules --------------------------------------------
    pytorch/2.5.1-cuda12.1-cudnn9    pytorch/2.6.0-cuda11.8-cudnn9    pytorch/2.7.1-cuda12.6-cudnn9    pytorch/2.8.0-cuda12.9-cudnn9 (D)
 
 $ module load pytorch/2.7.1-cuda12.6-cudnn9
 ```
 
-### Kernels
+Once the module is loaded, you can treat it just like any other activated environment. The python command now points to the container's interpreter.
 
-#### Copy kernel file to your $HOME
+### Install python packages
+
+After loading a Python module, to install packages in your home directory, enter:
+
+```
+pip install <package_name> --user
+```
+
+By default, Python will install local (i.e., user) packages in your home directory (e.g., ~/.local/lib/python3.11/site-packages).
+
+#### Preferred Method: Install into a Dedicated Project Library
+
+Use the **--target** option to install packages into a directory outside your main $HOME to keep it clean and manage packages per-project.
+
+```
+# 1. Create a dedicated project library folder
+$ mkdir -p /cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.2
+
+# 2. Install packages directly into that folder
+$ pip install pandas scikit-learn --target /cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.2
+
+# 3. **Crucially**: Tell the Python interpreter to look here for modules
+$ export PYTHONPATH=/cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.2:$PYTHONPATH
+
+# To make this setting permanent for your project's workflow, add the export line
+# to your Slurm batch script or your ~/.bashrc (if you only work on this project).
+```
+
+To automatically set this variable when logging in to the cluster, add this line to your `~/.bashrc`.
+
+### Running Jupyter Notebooks with Container Kernels
+
+To run the container using Jupyter Notebook/Lab on Open OnDemand, you have to ensure jupyter server uses the container's Python as a kernel.
+
+#### Copy and Customize the Kernel Configuration
+
+We provide a kernel file for each module, and users need to copy to your $HOME and modify it.
 
 ```
 $ cp -r /cluster/tufts/apps/container/ngc/kernels/pytorch-2.7.1-cuda12.6-cudnn9 $HOME/.local/share/jupyter/kernels/
 ```
 
-#### Add your PYTHONPATH to kernel
+#### Update the Kernel's PYTHONPATH
 
-You can edit `kernel.json` by setting `PYTHONPATH` under `env`.
+The **kernel.json** file defines the kernel's execution environment. You must edit this file to include your project-specific package installation path (**/cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.2** in this example).
 
 ```
 {
@@ -104,27 +149,4 @@ You can edit `kernel.json` by setting `PYTHONPATH` under `env`.
 }
 ```
 
-### Install python packages
-
-After loading a Python module, to install packages in your home directory, enter:
-
-```
-pip install <package_name> --user
-```
-
-By default, Python will install local (i.e., user) packages in your home directory (e.g., ~/.local/lib/python3.11/site-packages).
-
-To install Python packages in a library other than the default, you can use the `--target` option with pip. For example, to install a package in a project directory, enter something like the following:
-
-```
-mkdir -p /cluster/tufts/mylab/myUTLN/pythonEnv
-pip install <package_name> --target /cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.2
-```
-
-To load packages from this location, ensure you have appended your `PYTHONPATH` environment variable to include this directory:
-
-```
-export PYTHONPATH=/cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.2:$PYTHONPATH
-```
-
-To automatically set this variable when logging in to the cluster, add this line to your `~/.bashrc`.
+When you launch Jupyter, the "pytorch 2.7.1-cuda12.6-cudnn9" kernel will be ready-to-use.
