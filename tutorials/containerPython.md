@@ -50,8 +50,31 @@ $ module load pytorch/2.7.1-cuda12.6-cudnn9
 
 ### Kernels
 
+#### Copy kernel file to your $HOME
+
 ```
 $ cp -r /cluster/tufts/apps/container/ngc/kernels/pytorch-2.7.1-cuda12.6-cudnn9 $HOME/.local/share/jupyter/kernels/
+```
+
+#### Add your PYTHONPATH to kernel
+
+You can edit `kernel.json` by setting `PYTHONPATH` under `env`.
+
+```
+{
+"argv": [
+           "/cluster/tufts/apps/container/ngc/tools/pytorch/2.7.1-cuda12.6-cudnn9/bin/python",
+           "-m",
+           "ipykernel_launcher",
+           "-f",
+           "{connection_file}"
+            ],
+   "display_name": "pytorch 2.7.1-cuda12.6-cudnn9",
+   "language": "python",
+   "env": {
+    "PYTHONPATH": "/cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.2:$PYTHONPATH"
+  }
+}
 ```
 
 ### Install python packages
