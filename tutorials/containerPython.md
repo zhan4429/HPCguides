@@ -161,15 +161,15 @@ This kernel runs your notebook inside the containerized PyTorch environment whil
 
 <img src="img/jupyter.png"
        alt="Jupyter kernels"
-       style="float: left; margin-right: 15px; width: 300px; height: auto;">
+       style="float: left; margin-right: 15px; width: 800px; height: auto;">
 
   <p>
 
 After selecting the kernel, you can now run PyTorch with full NVIDIA GPU support.
 
-<img src="img/pytorch.png"
+<img src="img/torch.png"
        alt="Pytorch"
-       style="float: left; margin-right: 15px; width: 300px; height: auto;">
+       style="float: left; margin-right: 15px; width: 800px; height: auto;">
 
 <p>
 
@@ -177,6 +177,6 @@ It's worth to mention that the **pytorch** is provided by the module itself. Fur
 
 <img src="img/nltk.png"
        alt="NLTK"
-       style="float: left; margin-right: 15px; width: 300px; height: auto;">
+       style="float: left; margin-right: 15px; width: 800px; height: auto;">
 
 <p>
