@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+/* All 'body' styles are now in one place */
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  margin: 0 100px;
+  margin-bottom: 50px;
+}
+
+code,
+pre {
+  /* This "font stack" tries Fira Code first, then common system fonts */
+  font-family: "Fira Code", Menlo, Monaco, "Courier New", monospace;
+  /* This optional line enables the programming ligatures */
+  font-variant-ligatures: contextual;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  color: #0366fc;
+  font-size: 3rem;
+  text-decoration: none;
+}
+
+h1 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h2 {
+  color: #4079cf;
+  font-size: 2.5rem;
+}
+
+h3 {
+  color: #549dc4;
+  font-size: 2.25rem;
+}
+
+h4 {
+  color: #6db3a5;
+  font-size: 2rem;
+}
+
+h5 {
+  color: #9aa4b5;
+  font-size: 1.75rem;
+}
+
+h6 {
+  color: black;
+  font-size: 1.5rem;
+}
+
+table {
+  width: 80%;
+  margin: 50px 20px;
+  text-align: left;
+  border-collapse: separate;
+  border-spacing: 20px 0;
+}
+
+th {
+  font-size: 1.75rem;
+}
+
+pre {
+  background-color: #f4f4f4; /* gray background for the whole chunk */
+  padding: 12px;
+  border-radius: 6px;
+  overflow-x: auto; /* adds scroll if code is too wide */
+}
+
+code {
+  font-family: "Fira Code", Menlo, Monaco, "Courier New", monospace;
+  font-variant-ligatures: contextual;
+}

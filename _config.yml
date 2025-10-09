@@ -1,0 +1,13 @@
+title: "Getting Started with Tufts HPC"
+description: "HPC user guides provided by Tufts Research Technology"
+
+plugins:
+  - jekyll-relative-links
+  - jekyll-toc
+relative_links:
+  enabled: true
+  collections: true
+include:
+  - README.md
+  - tutorials/
+encoding: UTF-8
