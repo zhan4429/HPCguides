@@ -15,7 +15,7 @@ The two most common methods for managing scientific Python packages (like NumPy 
 You then create a new, isolated environment for your project:
 
 ```
-conda create -n my_project_env python=3.10 numpy`
+conda create -n my_project_env python=3.10 numpy
 ```
 
 You activate the environment:
@@ -24,7 +24,7 @@ You activate the environment:
 conda activate my_project_env
 ```
 
-and install all your required packages using **conda install** or the standard Python installer, **pip**.
+and install all your required packages using **conda install** or the standard Python installer **pip**.
 
 **Main Benefit**: It handles both Python packages and complex non-Python dependencies, ensuring they are compatible.
 
