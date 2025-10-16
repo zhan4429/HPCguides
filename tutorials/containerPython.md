@@ -99,7 +99,9 @@ After loading a container-based Python module, you can still install extra packa
 pip install <package_name> --user
 ```
 
-By default, Python will install local (i.e., user) packages in your home directory (e.g., ~/.local/lib/python3.11/site-packages).
+By default, this command installs the package locally under your home directory (e.g., `~/.local/lib/python3.11/site-packages`).
+
+While convenient, this approach is not recommended for long-term use because all user-installed packages are placed in the same location, which can easily lead to version conflicts between projects.
 
 #### Option 2: Preferred — Use a Dedicated Project Library
 
