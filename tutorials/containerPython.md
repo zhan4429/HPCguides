@@ -105,7 +105,7 @@ While convenient, this approach is not recommended for long-term use because all
 
 #### Option 2: Preferred — Use a Dedicated Project Library
 
-Use the **--target** option to install packages into a directory outside your main $HOME to keep it clean and manage packages per-project.
+Use the `--target` option to install packages into a directory outside your main $HOME to keep it clean and manage packages per-project.
 
 ```
 # 1. Create a dedicated project library folder
