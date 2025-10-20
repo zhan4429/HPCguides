@@ -173,7 +173,7 @@ Users can also install packages directly inside Jupyter via `pip`. Please note t
 !pip install 'tensorflow[and-cuda]' /cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.1
 ```
 
-`!` is the required to running shell commands directly from within a Jupyter cell.
+`!` is required to run shell commands directly within a Jupyter cell.
 Please make sure that the target directory is the same to what you set in `kernel.json`.
 
 <img src="img/jupyter.png"
