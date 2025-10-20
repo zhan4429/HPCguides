@@ -182,3 +182,14 @@ It's worth to mention that the **pytorch** is provided by the module itself. Fur
        style="float: left; margin-right: 15px; width: 800px; height: auto;">
 
 <p>
+
+#### Bonus. Inside extra Python packages inside jupyter
+
+Users can also install packages directly inside Jupyter via `pip`. Please note that to install packages to specific project directory, `--flag` is required.
+
+```
+!pip install 'tensorflow[and-cuda]' /cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.1
+```
+
+`!` is the required to running shell commands directly from within a Jupyter cell.
+Please make sure that the target directory is the same to what you set in `kernel.json`.
