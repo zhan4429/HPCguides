@@ -170,7 +170,7 @@ It's worth to mention that the **pytorch** is provided by the module itself. Fur
 Users can also install packages directly inside Jupyter via `pip`. Please note that to install packages to specific project directory, `--flag` is required.
 
 ```
-!pip install 'tensorflow[and-cuda]' /cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.1
+!pip install 'tensorflow[and-cuda]' --flag /cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.1
 ```
 
 `!` is required to run shell commands directly within a Jupyter cell.
