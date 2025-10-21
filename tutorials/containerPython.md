@@ -165,7 +165,7 @@ After selecting the kernel, you can now run PyTorch with full NVIDIA GPU support
 
 It's worth to mention that the **pytorch** is provided by the module itself. Furthermore, users can execute custom Python packages such as NLTK.
 
-#### Bonus. Inside extra Python packages inside jupyter
+#### Bonus: Install extra Python packages inside jupyter
 
 Users can also install packages directly inside Jupyter via `pip`. Please note that to install packages to specific project directory, `--flag` is required.
 
