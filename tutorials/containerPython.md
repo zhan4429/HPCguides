@@ -172,11 +172,11 @@ Furthermore, users can execute custom Python packages such as **NLTK**.
 
 <img src="img/jupyter.png" alt="Jupyter kernels" width="600"/>
 
-#### Example: Running PyTorch
+##### Example: Running PyTorch
 
 <img src="img/torch.png" alt="PyTorch Example" width="800"/>
 
-#### Example: Using NLTK
+##### Example: Using NLTK
 
 <img src="img/nltk.png" alt="NLTK Example" width="800"/>
 
