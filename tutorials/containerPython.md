@@ -157,33 +157,37 @@ The **kernel.json** file defines how Jupyter launches your Python environment. Y
 
 #### Step 3. Run PyTorch and Custom Packages in Jupyter
 
-Once saved, launch Jupyter Notebook or JupyterLab using the **Jupyter** app on Open OnDemand.
-You should now see a kernel named **pytorch 2.7.1-cuda12.6-cudnn9** in the kernel selection menu.
+Once saved, launch **Jupyter Notebook** or **JupyterLab** using the **Jupyter** app on Open OnDemand.  
+You should now see a kernel named **`pytorch 2.7.1-cuda12.6-cudnn9`** in the kernel selection menu.  
 This kernel runs your notebook inside the containerized PyTorch environment while including your own installed Python packages.
 
 After selecting the kernel, you can now run PyTorch with full NVIDIA GPU support.
 
-It's worth to mention that the **pytorch** is provided by the module itself. Furthermore, users can execute custom Python packages such as NLTK.
+It’s worth mentioning that the **PyTorch** environment is provided by the module itself.  
+Furthermore, users can execute custom Python packages such as **NLTK**.
 
-<img src="img/jupyter.png"
-       alt="Jupyter kernels"
-       style="float: left; margin-right: 15px; width: 600px; height: auto;">
+---
 
-<img src="img/torch.png"
-       alt="Pytorch"
-       style="float: left; margin-right: 15px; width: 800px; height: auto;">
+##### Jupyter Kernel Example
 
-<img src="img/nltk.png"
-       alt="NLTK"
-       style="float: left; margin-right: 15px; width: 800px; height: auto;">
+<img src="img/jupyter.png" alt="Jupyter kernels" width="600"/>
 
-#### Bonus: Install extra Python packages inside jupyter
+#### Example: Running PyTorch
 
-Users can also install packages directly inside Jupyter via `pip`. Please note that to install packages to specific project directory, `--flag` is required.
+<img src="img/torch.png" alt="PyTorch Example" width="800"/>
 
-```
+#### Example: Using NLTK
+
+<img src="img/nltk.png" alt="NLTK Example" width="800"/>
+
+---
+
+#### Bonus: Install Extra Python Packages Inside Jupyter
+
+Users can also install packages directly inside Jupyter via `pip`.
+
+> 💡 **Note:** To install packages to a specific project directory, use the `--flag` option.
+
+```bash
 !pip install 'tensorflow[and-cuda]' --flag /cluster/tufts/mylab/myUTLN/pythonEnv/pytorch2.7.1
 ```
-
-`!` is required to run shell commands directly within a Jupyter cell.
-Please make sure that the target directory is the same to what you set in `kernel.json`.
