@@ -165,6 +165,18 @@ After selecting the kernel, you can now run PyTorch with full NVIDIA GPU support
 
 It's worth to mention that the **pytorch** is provided by the module itself. Furthermore, users can execute custom Python packages such as NLTK.
 
+<img src="img/jupyter.png"
+       alt="Jupyter kernels"
+       style="float: left; margin-right: 15px; width: 600px; height: auto;">
+
+<img src="img/torch.png"
+       alt="Pytorch"
+       style="float: left; margin-right: 15px; width: 800px; height: auto;">
+
+<img src="img/nltk.png"
+       alt="NLTK"
+       style="float: left; margin-right: 15px; width: 800px; height: auto;">
+
 #### Bonus: Install extra Python packages inside jupyter
 
 Users can also install packages directly inside Jupyter via `pip`. Please note that to install packages to specific project directory, `--flag` is required.
@@ -175,21 +187,3 @@ Users can also install packages directly inside Jupyter via `pip`. Please note t
 
 `!` is required to run shell commands directly within a Jupyter cell.
 Please make sure that the target directory is the same to what you set in `kernel.json`.
-
-<img src="img/jupyter.png"
-       alt="Jupyter kernels"
-       style="float: left; margin-right: 15px; width: 600px; height: auto;">
-
-  <p>
-
-<img src="img/torch.png"
-       alt="Pytorch"
-       style="float: left; margin-right: 15px; width: 800px; height: auto;">
-
-<p>
-
-<img src="img/nltk.png"
-       alt="NLTK"
-       style="float: left; margin-right: 15px; width: 800px; height: auto;">
-
-<p>
